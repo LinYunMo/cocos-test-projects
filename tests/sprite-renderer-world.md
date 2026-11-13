@@ -1,17 +1,13 @@
-# SpriteRenderer 世界空间精灵验收
+# SpriteRenderer 自动验收
 
-使用包含 cocos/cocos4#396 的引擎打开工程。双击 `assets/cases/2D/sprite-renderer-world/sprite-renderer-world.scene`，点击预览。横屏查看最清楚。场景里的精灵、方柱、相机和排序组件均可在检查器中选择。底板只提供文字和背景，测试对象由真实组件绘制。
+使用包含 [cocos/cocos4#396](https://github.com/cocos/cocos4/pull/396) 的引擎。三个场景位于 `assets/cases/2D/sprite-renderer-world/`。单独预览任一场景，组件会在首批渲染帧内自动执行检查，恢复展示状态，并用 Label 显示通过数或失败项。场景中所有测试对象均可在 Creator 检查器中查看。
 
-| 观察位置 | 操作与预期 |
-| --- | --- |
-| 左上 · 深度穿插 | 薄荷色方柱斜穿珊瑚色精灵。左半段挡住精灵，右半段被精灵挡住，伸出轮廓的两端仍可见。将 `Mint bar crossing plane` 的 Y 旋转由 27° 改为 −27°，左右关系应反转。 |
-| 中上、右上 · 透明混合 | 蓝色 MeshRenderer 和珊瑚色 SpriteRenderer 的错位部分保留各自颜色。重叠处 A 偏蓝、B 偏红。两组的局部位置、材质和透明度一致。把 `Coral A` 的 Sorting Order 从 −1 改成 1，A 应与 B 相同。此项检验透明对象级排序。 |
-| 中排 · 绘制模式 | Simple 显示帧的自然尺寸。Sliced 的四角保持尺寸，中央箭头拉长。Continuous 的末块被裁剪。Adaptive 只显示完整箭头。把 Adaptive 的阈值从 0.5 改到 1，目标宽度不变，完整块数减少。 |
-| 左下 · 实例参数 | 三个精灵共享同一帧和材质。从左到右依次为原图、水平翻转、垂直翻转并着色。修改右侧精灵的 Color 或 Alpha，观察其余两个精灵保持原样。 |
-| 下排 · PPU 与 Pivot | 两帧都为 96 × 64 像素。左图 PPU 为 100，中心对齐定位标记；右图 PPU 为 200，宽高各减半，左下角对齐定位标记。 |
-| 下排 · 静态图集 | 左右使用仓库已有的同一气泡图案。左帧正常打包，右帧旋转打包，显示的方向、轮廓与内容应一致。 |
-| 右下 · 零尺寸与恢复 | 左侧标记上方初始为空。选择 `Restore width to 1.2`，将 Size 从 (0, 0.8) 改为 (1.2, 0.8)，应与右侧参照一致。改回 0 应消失。 |
+| 场景 | 观察内容 | 自动判定 |
+| --- | --- | --- |
+| `sprite-renderer-world.scene` | 透视相机俯视带光照的内置球体和圆柱台。飞行标记横穿球体，球面中央遮住机身，靠近轮廓处机身露出。中、右两组用蓝色透明球对比绘制顺序。 | 5 项。采样组合画面及球体、精灵各自单独绘制的画面，对比中心与边缘；前移精灵解除遮挡；切换 Sorting Order，比对同组像素和另一组的混合颜色。 |
+| `sprite-renderer-draw-modes.scene` | 同一张箭头纹理展示 Simple、Sliced、Tiled Continuous 与 Tiled Adaptive。 | 7 项。检查自然尺寸、九宫格、末块裁剪与完整铺块的像素差异、Adaptive 阈值、窄尺寸边框压缩、零尺寸隐藏与正尺寸恢复。 |
+| `sprite-renderer-resources.scene` | 对照独立着色与翻转、100/200 PPU 及支点、普通与旋转打包帧、显式尺寸面板。 | 7 项。检查 PPU 和 Pivot 对包围盒的影响、图集取样、X/Y 翻转、共享材质实例隔离、换帧保留尺寸、解绑和重新绑定后的画面。 |
 
-可在同一场景继续检验资源切换。选择有显式 Size 的 `Sliced`，把 Sprite Frame 换成 `signal-pivot`。尺寸值应保留，支点应改变。清空 Sprite Frame 时图像消失；重新指定 `signal` 时恢复。禁用再启用组件，图像也应恢复。要检验边框压缩，把 Sliced 的宽度改为 0.12（小于两侧边框的总宽 0.16），两侧边框应收窄，几何不应翻转。
+**批量运行。** 三个场景已登记在 `assets/auto-test-config.json`。使用项目已有的 automation-framework 启动测试，并将三个场景纳入测试构建。入口为 `assets/auto-test-case/dynamic/2D/sprite-renderer.test.ts`。框架逐场读取相同的验收结果，遇到失败或等待超时会报告对应场景，无需在检查器中调参数。单场预览也可独立执行，无需启动测试服务。
 
-修改属性后可用撤销恢复基线。使用 TestList 的构建需要把本场景加入参与构建的场景列表，之后可从 2D 分组进入。
+世界对象均由透视相机绘制。单独的 UI 相机只绘制引擎 Label。像素检查临时创建同位置的透视相机和 800 × 500 的离屏目标，在绘制结束后读回世界对象的颜色。完成后释放该目标。透明对照检查对象级排序。记录的图形验收环境为 Web Legacy Forward 和 Web Custom。

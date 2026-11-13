@@ -6,6 +6,9 @@
     "maxRetryTimes": 3,
     "sceneList": [
         "2d-rendering-in-3d",
+        "sprite-renderer-world",
+        "sprite-renderer-draw-modes",
+        "sprite-renderer-resources",
         "mipMapCheck",
         "setMipRange",
         "AnimationEvent",

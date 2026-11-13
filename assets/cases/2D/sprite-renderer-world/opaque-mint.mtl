@@ -4,7 +4,7 @@
   "_objFlags": 0,
   "_native": "",
   "_effectAsset": {
-    "__uuid__": "a3cd009f-0ab0-420d-9278-b9fdab939bbc",
+    "__uuid__": "c8f66d17-351a-48da-a12c-0212d28575c4",
     "__expectedType__": "cc.EffectAsset"
   },
   "_techIdx": 0,
@@ -28,11 +28,13 @@
     {
       "mainColor": {
         "__type__": "cc.Color",
-        "r": 47,
+        "r": 65,
         "g": 213,
-        "b": 172,
+        "b": 171,
         "a": 255
-      }
+      },
+      "roughness": 0.48,
+      "metallic": 0.06
     }
   ]
 }

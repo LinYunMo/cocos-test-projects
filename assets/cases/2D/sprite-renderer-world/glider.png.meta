@@ -2,7 +2,7 @@
   "ver": "1.0.27",
   "importer": "image",
   "imported": true,
-  "uuid": "44478430-387b-5e88-84f1-df35bafa130d",
+  "uuid": "202650cc-198c-5a1c-a117-c5888b810d54",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "44478430-387b-5e88-84f1-df35bafa130d@6c48a",
-      "displayName": "window",
+      "uuid": "202650cc-198c-5a1c-a117-c5888b810d54@6c48a",
+      "displayName": "glider",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "44478430-387b-5e88-84f1-df35bafa130d",
+        "imageUuidOrDatabaseUri": "202650cc-198c-5a1c-a117-c5888b810d54",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "44478430-387b-5e88-84f1-df35bafa130d@f9941",
-      "displayName": "window",
+      "uuid": "202650cc-198c-5a1c-a117-c5888b810d54@f9941",
+      "displayName": "glider",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -45,10 +45,10 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 128,
-        "height": 80,
-        "rawWidth": 128,
-        "rawHeight": 80,
+        "width": 160,
+        "height": 72,
+        "rawWidth": 160,
+        "rawHeight": 72,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
@@ -59,7 +59,7 @@
         "pivotY": 0.5,
         "meshType": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "44478430-387b-5e88-84f1-df35bafa130d@6c48a",
+        "imageUuidOrDatabaseUri": "202650cc-198c-5a1c-a117-c5888b810d54@6c48a",
         "atlasUuid": "",
         "trimType": "custom"
       },
@@ -75,7 +75,7 @@
     "type": "sprite-frame",
     "fixAlphaTransparencyArtifacts": false,
     "hasAlpha": true,
-    "redirect": "44478430-387b-5e88-84f1-df35bafa130d@f9941",
+    "redirect": "202650cc-198c-5a1c-a117-c5888b810d54@f9941",
     "flipVertical": false
   }
 }
